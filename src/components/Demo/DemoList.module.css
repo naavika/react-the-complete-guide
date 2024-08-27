@@ -1,0 +1,29 @@
+.list {
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 40rem;
+    background-color: #f8dfff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  }
+  
+  .list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .list li {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 8px;
+  }
+  

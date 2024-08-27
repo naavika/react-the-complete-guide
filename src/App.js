@@ -1,30 +1,36 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
+
+import DemoList from './components/Demo/DemoList';
 import Button from './components/UI/Button/Button';
 import './App.css';
-import DemoOutput from './components/Demo/DemoOutput';
 
 function App() {
-  const [showParagraph, setShowParagraph] = useState(false);
-  const [allowToggle, setAllowToggle] = useState(false);
+  const [ListTitle, setListTitle] = useState('My List');
+  const [isAscending, setIsAscending] = useState(true);
 
-  console.log('APP RUNNING');
+  
+  const changeTitleHandler = useCallback(() => {
+    setListTitle('New Title');
+  },[]);
 
-  const toggleParagraphHandler = useCallback(() => {
-    if (allowToggle) {
-    setShowParagraph((prevShowparagraph) => !prevShowparagraph);
-    }
-  },[allowToggle]);
+  const toggleOrderHandler = useCallback(() => {
+    setIsAscending((prevState) => !prevState);
+  }, []);
 
-  const allowToggleHandler = () => {
-    setAllowToggle(true);
-  };
+  const ListItems = useMemo(() => {
+    const items = [5, 3, 1, 10, 9];
+    return isAscending ? items.sort((a, b) => a - b) : items.sort((a, b) => b - a);
+  }, [isAscending]);
+
+  
 
   return (
     <div className="app">
-      <h1>Hi there!</h1>
-      <DemoOutput show ={showParagraph}/>
-      <Button onClick = {allowToggleHandler}>Allow Toggling</Button>
-      <Button onClick = {toggleParagraphHandler}>Toggle Paragraph!</Button>
+      <DemoList title = {ListTitle} items = {ListItems}/>
+      <Button onClick = {changeTitleHandler}>Change List Title</Button>
+      <Button onClick={toggleOrderHandler}>
+        {isAscending ? 'Change to Descending Order' : 'Change to Ascending Order'}
+      </Button>
     </div>
   );
 }
